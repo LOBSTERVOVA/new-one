@@ -40,7 +40,7 @@
     </androidx.cardview.widget.CardView>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/constraintLayout"
+        android:id="@+id/constraintLayoutTop"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:background="#FFFFFF"
@@ -89,7 +89,7 @@
         app:layout_constraintBottom_toTopOf="@+id/cardView17"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/constraintLayout" />
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayoutTop" />
 
     <TextView
         android:id="@+id/textView14"

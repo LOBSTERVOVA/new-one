@@ -2,12 +2,11 @@ package com.example.mywork.framework
 
 import android.content.Context
 import androidx.fragment.app.FragmentActivity
-import com.example.mywork.HotelModel
-import com.example.mywork.Rooms
+import androidx.fragment.app.FragmentManager
 import com.example.mywork.adapters.BookingRecyclerAdapter
 import com.example.mywork.adapters.RecyclerViewRoomsAdapter
-import com.example.mywork.ui.BookingActivity
-import com.example.mywork.ui.RoomsActivity
+import com.example.mywork.ui.BookingFragment
+import com.example.mywork.ui.RoomFragment
 import dagger.Component
 import dagger.Module
 import dagger.Provides
@@ -22,23 +21,23 @@ class MyDaggerModule(private val context: Context) {
 
 @Component(modules = [MyDaggerModule::class])
 interface MyComponent {
-    fun inject(activity: BookingActivity)
+    fun inject(fragment: BookingFragment)
 }
 
 @Module
 class MyDaggerRoomModule(
     private val rooms: Rooms,
     private val activity: FragmentActivity,
-    private val context: Context,
+    private val fragmentManager: FragmentManager,
     private val hotelModel: HotelModel
 ) {
     @Provides
     fun provideAdapter(): RecyclerViewRoomsAdapter {
-        return RecyclerViewRoomsAdapter(rooms, activity, context, hotelModel)
+        return RecyclerViewRoomsAdapter(rooms, activity, fragmentManager, hotelModel)
     }
 }
 
 @Component(modules = [MyDaggerRoomModule::class])
 interface MyRoomComponent {
-    fun inject(activity: RoomsActivity)
+    fun inject(fragment: RoomFragment)
 }

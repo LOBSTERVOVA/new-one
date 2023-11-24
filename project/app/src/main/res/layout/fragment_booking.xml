@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/very_light_gray"
+    android:elevation="10dp"
     tools:context=".ui.BookingActivity">
 
     <androidx.appcompat.widget.LinearLayoutCompat
@@ -17,7 +18,31 @@
             android:layout_height="wrap_content">
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/constraintLayout"
+                android:id="@+id/placeholder"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginTop="15dp"
+                android:background="#FFFFFF"
+                android:elevation="10dp"
+                android:visibility="visible"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/constraintLayoutTop">
+
+                <ProgressBar
+                    android:id="@+id/progressBar3"
+                    style="?android:attr/progressBarStyle"
+                    android:layout_width="160dp"
+                    android:layout_height="160dp"
+                    android:layout_marginTop="200dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/constraintLayoutTop"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:background="#FFFFFF"
@@ -45,7 +70,7 @@
                     android:ellipsize="end"
                     android:fontFamily="@font/sf_pro_display_black"
                     android:maxLines="1"
-                    android:text="Бронирование"
+                    android:text="@string/booking"
                     android:textColor="@color/dark_gray"
                     android:textSize="18sp"
                     app:layout_constraintBottom_toBottomOf="@+id/imageView5"
@@ -65,7 +90,7 @@
                 app:cardCornerRadius="15dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/constraintLayout">
+                app:layout_constraintTop_toBottomOf="@+id/constraintLayoutTop">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
@@ -80,7 +105,6 @@
                         android:elevation="5dp"
                         android:fontFamily="@font/sf_pro_display_black"
                         android:gravity="center|start"
-                        android:text="имя отеля"
                         android:textColor="@color/dark_gray"
                         android:textSize="22sp"
                         app:layout_constraintStart_toStartOf="parent"
@@ -98,7 +122,6 @@
                         android:gravity="center|start"
                         android:paddingStart="5dp"
                         android:paddingEnd="5dp"
-                        android:text="прекрасно"
                         android:textColor="#FF9800"
                         android:textSize="16sp"
                         app:layout_constraintStart_toStartOf="parent"
@@ -114,12 +137,12 @@
                         android:clickable="true"
                         android:elevation="5dp"
                         android:fontFamily="@font/sf_pro_display_regular"
-                        android:text="кчв мапвимпа вмспсяяч"
                         android:textColor="#046CED"
                         android:textSize="14sp"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/name2" />
+                        app:layout_constraintTop_toBottomOf="@+id/name2"
+                        android:focusable="true" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </androidx.cardview.widget.CardView>
 
@@ -146,7 +169,7 @@
                         android:layout_marginStart="20dp"
                         android:layout_marginTop="20dp"
                         android:fontFamily="@font/sf_pro_display_regular"
-                        android:text="Вылет из"
+                        android:text="@string/departure"
                         android:textSize="19sp"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
@@ -158,7 +181,7 @@
                         android:layout_marginStart="20dp"
                         android:layout_marginTop="20dp"
                         android:fontFamily="@font/sf_pro_display_regular"
-                        android:text="Страна, город"
+                        android:text="@string/country_city"
                         android:textSize="19sp"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/deploy" />
@@ -170,7 +193,7 @@
                         android:layout_marginStart="20dp"
                         android:layout_marginTop="20dp"
                         android:fontFamily="@font/sf_pro_display_regular"
-                        android:text="Даты"
+                        android:text="@string/dates"
                         android:textSize="19sp"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/city" />
@@ -182,7 +205,7 @@
                         android:layout_marginStart="20dp"
                         android:layout_marginTop="20dp"
                         android:fontFamily="@font/sf_pro_display_regular"
-                        android:text="Кол-во ночей"
+                        android:text="@string/nights"
                         android:textSize="19sp"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/dates" />
@@ -194,7 +217,7 @@
                         android:layout_marginStart="20dp"
                         android:layout_marginTop="20dp"
                         android:fontFamily="@font/sf_pro_display_regular"
-                        android:text="Отель"
+                        android:text="@string/hotel"
                         android:textSize="19sp"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/nights" />
@@ -206,7 +229,7 @@
                         android:layout_marginStart="20dp"
                         android:layout_marginTop="20dp"
                         android:fontFamily="@font/sf_pro_display_regular"
-                        android:text="Номер"
+                        android:text="@string/room"
                         android:textSize="19sp"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/hotelText" />
@@ -218,7 +241,7 @@
                         android:layout_marginStart="20dp"
                         android:layout_marginTop="20dp"
                         android:fontFamily="@font/sf_pro_display_regular"
-                        android:text="Питание"
+                        android:text="@string/nutrition"
                         android:textSize="19sp"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/roomHotel" />
@@ -338,7 +361,7 @@
                         android:elevation="5dp"
                         android:fontFamily="@font/sf_pro_display_black"
                         android:gravity="center|start"
-                        android:text="Информация о покупателе"
+                        android:text="@string/buyer_info"
                         android:textColor="@color/dark_gray"
                         android:textSize="22sp"
                         app:layout_constraintStart_toStartOf="parent"
@@ -351,7 +374,7 @@
                         android:layout_marginStart="30dp"
                         android:layout_marginTop="20dp"
                         android:layout_marginEnd="30dp"
-                        android:hint="Номер телефона"
+                        android:hint="@string/phone_num"
                         app:boxCornerRadiusBottomEnd="10dp"
                         app:boxCornerRadiusBottomStart="10dp"
                         app:boxCornerRadiusTopEnd="10dp"
@@ -380,7 +403,7 @@
                         android:layout_marginStart="30dp"
                         android:layout_marginTop="20dp"
                         android:layout_marginEnd="30dp"
-                        android:hint="Почта"
+                        android:hint="@string/email"
                         app:boxCornerRadiusBottomEnd="10dp"
                         app:boxCornerRadiusBottomStart="10dp"
                         app:boxCornerRadiusTopEnd="10dp"
@@ -412,7 +435,7 @@
                         android:layout_marginEnd="20dp"
                         android:layout_marginBottom="20dp"
                         android:fontFamily="@font/sf_pro_display_regular"
-                        android:text="Эти данные никому не передаются. После оплаты мы вышлем чек на указанный номер и почту"
+                        android:text="@string/data_info"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
@@ -457,7 +480,7 @@
                         android:elevation="5dp"
                         android:fontFamily="@font/sf_pro_display_black"
                         android:gravity="center|start"
-                        android:text="Информация о покупателе"
+                        android:text="@string/buyer_info"
                         android:textColor="@color/dark_gray"
                         android:textSize="19sp"
                         app:layout_constraintBottom_toBottomOf="parent"
@@ -506,7 +529,7 @@
                         android:layout_marginStart="20dp"
                         android:layout_marginTop="20dp"
                         android:fontFamily="@font/alef"
-                        android:text="Тур"
+                        android:text="@string/tour"
                         android:textSize="19sp"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
@@ -518,7 +541,7 @@
                         android:layout_marginStart="20dp"
                         android:layout_marginTop="20dp"
                         android:fontFamily="@font/alef"
-                        android:text="Топливный сбор"
+                        android:text="@string/fuel"
                         android:textSize="19sp"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/tour" />
@@ -530,7 +553,7 @@
                         android:layout_marginStart="20dp"
                         android:layout_marginTop="20dp"
                         android:fontFamily="@font/alef"
-                        android:text="Сервисный сбор"
+                        android:text="@string/service"
                         android:textSize="19sp"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/fuelCharge" />
@@ -543,7 +566,7 @@
                         android:layout_marginTop="20dp"
                         android:layout_marginBottom="20dp"
                         android:fontFamily="@font/alef"
-                        android:text="К оплате"
+                        android:text="@string/for_payment"
                         android:textSize="19sp"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
@@ -554,7 +577,6 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="20dp"
-                        android:text="TextView"
                         android:textColor="@color/dark_gray"
                         android:textSize="19sp"
                         app:layout_constraintBottom_toBottomOf="@+id/tour"
@@ -565,7 +587,6 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="20dp"
-                        android:text="TextView"
                         android:textColor="@color/dark_gray"
                         android:textSize="19sp"
                         app:layout_constraintBottom_toBottomOf="@+id/fuelCharge"
@@ -576,7 +597,6 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="20dp"
-                        android:text="TextView"
                         android:textColor="@color/dark_gray"
                         android:textSize="19sp"
                         app:layout_constraintBottom_toBottomOf="@+id/servicePayment"
@@ -587,7 +607,6 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="20dp"
-                        android:text="TextView"
                         android:textColor="@color/dark_gray"
                         android:textSize="19sp"
                         app:layout_constraintBottom_toBottomOf="@+id/totalPayment"

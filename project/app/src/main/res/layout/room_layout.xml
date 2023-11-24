@@ -98,11 +98,12 @@
         android:fontFamily="@font/sf_pro_display_regular"
         android:paddingStart="5dp"
         android:paddingEnd="5dp"
-        android:text="Подробнее о номере ❯"
+        android:text="@string/more"
         android:textColor="#046CED"
         android:textSize="16sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/pec1" />
+        app:layout_constraintTop_toBottomOf="@+id/pec1"
+        android:focusable="true" />
 
     <TextView
         android:id="@+id/price1"
@@ -135,7 +136,7 @@
         android:layout_marginEnd="20dp"
         android:backgroundTint="@color/light_blue"
         android:fontFamily="@font/sf_pro_display_regular"
-        android:text="Выбрать номер"
+        android:text="@string/choose_room_button"
         android:textSize="16sp"
         app:cornerRadius="15dp"
         app:layout_constraintEnd_toEndOf="parent"

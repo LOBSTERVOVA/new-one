@@ -6,31 +6,36 @@ import android.os.Bundle
 import android.util.Log
 import android.util.Patterns
 import android.view.KeyEvent
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import android.widget.Toast
 import androidx.activity.viewModels
-import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.core.widget.addTextChangedListener
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
-import com.example.mywork.adapters.BookingRecyclerAdapter
 import com.example.mywork.R
-import com.example.mywork.databinding.ActivityBookingBinding
+import com.example.mywork.adapters.BookingRecyclerAdapter
+import com.example.mywork.databinding.FragmentBookingBinding
 import com.example.mywork.framework.DaggerMyComponent
 import com.example.mywork.framework.MyDaggerModule
-import com.example.mywork.getHotel
+import com.example.mywork.ui.viewModels.BookingViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 const val NUM_SYMBOLS = "1234567890"
 
-class BookingActivity : AppCompatActivity() {
-    private val viewModel by viewModels<BookingViewModel>{
-        object: ViewModelProvider.Factory {
+class BookingFragment : Fragment() {
+
+    private val viewModel by viewModels<BookingViewModel> {
+        object : ViewModelProvider.Factory {
             override fun <T : ViewModel> create(modelClass: Class<T>): T {
-                return BookingViewModel() as? T?: throw IllegalStateException()
+                return BookingViewModel(requireContext()) as? T ?: throw IllegalStateException()
             }
         }
     }
@@ -38,35 +43,42 @@ class BookingActivity : AppCompatActivity() {
     @Inject
     lateinit var adapter: BookingRecyclerAdapter
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        val binding = ActivityBookingBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        val binding = FragmentBookingBinding.inflate(layoutInflater)
 
-        DaggerMyComponent.builder()
-            .myDaggerModule(MyDaggerModule(this))
-            .build()
-            .inject(this)
         if(viewModel.adapter == null){
+            DaggerMyComponent.builder()
+                .myDaggerModule(MyDaggerModule(requireContext()))
+                .build()
+                .inject(this)
             viewModel.adapter = adapter
         }
 
         binding.imageView5.setOnClickListener {
-            finish()
+            parentFragmentManager.popBackStack()
         }
 
-        binding.recyclerView2.layoutManager = GridLayoutManager(this, 1)
+        binding.recyclerView2.layoutManager = GridLayoutManager(requireContext(), 1)
         binding.recyclerView2.adapter = viewModel.adapter
         binding.imagePlus.setOnClickListener {
             val error = viewModel.adapter!!.addUser()
             if (error != null) {
-                Toast.makeText(this, error, Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), error, Toast.LENGTH_SHORT).show()
             }
         }
 
         lifecycleScope.launch {
-            val bookInfo = getHotel.getBooking()
+
+            if(viewModel.bookingInfo==null){
+                viewModel.bookingInit()
+            }
+            val bookInfo = viewModel.bookingInfo!!
+
             with(binding) {
+                placeholder.visibility = View.GONE
                 name2.text = bookInfo.hotel_name
                 rating2.text = "$STAR ${bookInfo.horating} ${bookInfo.rating_name}"
                 address2.text = bookInfo.hotel_adress
@@ -82,7 +94,8 @@ class BookingActivity : AppCompatActivity() {
                 servicePriceT.text = bookInfo.service_charge.toString()+" ₽"
                 totalPriceT.text = (bookInfo.tour_price+bookInfo.fuel_charge+bookInfo.service_charge).toString()+" ₽"
                 buttonPay.text = "Оплатить "+totalPriceT.text
-                editTextPhone.setText("+7 (***) ***-**-**")
+                editTextTextEmailAddress.setText(viewModel.emailTextFieldText)
+                editTextPhone.setText(viewModel.numberTextFieldText)
                 var phoneText = binding.editTextPhone.text.toString()
                 editTextPhone.setSelection(getPos(editTextPhone.text.toString()))
                 editTextPhone.setOnClickListener {
@@ -95,7 +108,7 @@ class BookingActivity : AppCompatActivity() {
                     if (editTextPhone.text.contains("*")) {
                         editTextPhone.backgroundTintList = ColorStateList.valueOf(
                             ContextCompat.getColor(
-                                this@BookingActivity,
+                                requireContext(),
                                 R.color.error_color
                             )
                         )
@@ -104,14 +117,14 @@ class BookingActivity : AppCompatActivity() {
                     if (!isValidEmail(editTextTextEmailAddress.text.toString())) {
                         editTextTextEmailAddress.backgroundTintList = ColorStateList.valueOf(
                             ContextCompat.getColor(
-                                this@BookingActivity,
+                                requireContext(),
                                 R.color.error_color
                             )
                         )
                         touristsCheckOk = false
                     }
                     if(touristsCheckOk){
-                        val intent = Intent(this@BookingActivity, SuccessActivity::class.java)
+                        val intent = Intent(requireContext(), SuccessActivity::class.java)
                         startActivity(intent)
                     }
                 }
@@ -121,7 +134,7 @@ class BookingActivity : AppCompatActivity() {
                         if (!isValidEmail(editTextTextEmailAddress.text.toString())) {
                             editTextTextEmailAddress.backgroundTintList = ColorStateList.valueOf(
                                 ContextCompat.getColor(
-                                    this@BookingActivity,
+                                    requireContext(),
                                     R.color.error_color
                                 )
                             )
@@ -150,6 +163,9 @@ class BookingActivity : AppCompatActivity() {
                     }
                     return@setOnKeyListener false
                 }
+                editTextTextEmailAddress.addTextChangedListener {
+                    viewModel.emailTextFieldText = it.toString()
+                }
                 editTextPhone.addTextChangedListener {
                     editTextPhone.backgroundTintList = null
 
@@ -172,6 +188,7 @@ class BookingActivity : AppCompatActivity() {
                                     editTextPhone.text.toString()[i].toString()
                                 )
                                 editTextPhone.setText(phoneText)
+                                viewModel.numberTextFieldText=phoneText
                                 editTextPhone.setSelection(getPos(editTextPhone.text.toString()))
                                 break
                             }
@@ -181,6 +198,7 @@ class BookingActivity : AppCompatActivity() {
                 }
             }
         }
+        return binding.root
     }
 
     private fun getPos(s: String): Int {

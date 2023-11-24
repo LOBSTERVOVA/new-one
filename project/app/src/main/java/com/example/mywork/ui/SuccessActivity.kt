@@ -7,7 +7,7 @@ import androidx.activity.viewModels
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.example.mywork.databinding.ActivitySuccessBinding
-import kotlin.random.Random
+import com.example.mywork.ui.viewModels.SuccessViewModel
 
 class SuccessActivity : AppCompatActivity() {
     private val viewModel by viewModels<SuccessViewModel>{
@@ -29,8 +29,8 @@ class SuccessActivity : AppCompatActivity() {
 
         binding.buttonPay.setOnClickListener {
             val intent = Intent(this, HotelActivity::class.java)
-            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP)
             startActivity(intent)
+            finishAffinity()
         }
     }
 }

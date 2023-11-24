@@ -80,7 +80,8 @@
                 android:textSize="14sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/name" />
+                app:layout_constraintTop_toBottomOf="@+id/name"
+                android:focusable="true" />
 
             <TextView
                 android:id="@+id/price"
@@ -90,7 +91,7 @@
                 android:elevation="5dp"
                 android:fontFamily="@font/sf_pro_display_regular"
                 android:textColor="@color/dark_gray"
-                android:textSize="30dp"
+                android:textSize="30sp"
                 app:layout_constraintStart_toEndOf="@+id/from"
                 app:layout_constraintTop_toBottomOf="@+id/address" />
 
@@ -101,7 +102,7 @@
                 android:layout_marginStart="20dp"
                 android:elevation="5dp"
                 android:fontFamily="@font/sf_pro_display_regular"
-                android:text="от "
+                android:text="@string/from"
                 android:textColor="@color/dark_gray"
                 android:textSize="30sp"
                 app:layout_constraintBottom_toBottomOf="@+id/price"
@@ -115,7 +116,6 @@
                 android:layout_marginBottom="6dp"
                 android:elevation="5dp"
                 android:fontFamily="@font/sf_pro_display_regular"
-                android:text="TextView"
                 android:textSize="16sp"
                 app:layout_constraintBottom_toBottomOf="@+id/price"
                 app:layout_constraintStart_toEndOf="@+id/price" />
@@ -141,7 +141,7 @@
                 android:layout_marginTop="40dp"
                 android:elevation="5dp"
                 android:fontFamily="@font/sf_pro_display_black"
-                android:text="Отель"
+                android:text="@string/hotel"
                 android:textColor="@color/dark_gray"
                 android:textSize="18sp"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -156,7 +156,7 @@
                 android:layout_marginTop="30dp"
                 android:elevation="5dp"
                 android:fontFamily="@font/sf_pro_display_black"
-                android:text="Об отеле"
+                android:text="@string/about_hotel"
                 android:textColor="@color/dark_gray"
                 android:textSize="22sp"
                 app:layout_constraintStart_toStartOf="@+id/cardView2"
@@ -322,7 +322,6 @@
                 android:layout_marginEnd="20dp"
                 android:elevation="5dp"
                 android:fontFamily="@font/sf_pro_display_regular"
-                android:text="TextView"
                 android:textColor="@color/dark_gray"
                 android:textSize="16sp"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -370,7 +369,7 @@
                 android:layout_marginTop="-5dp"
                 android:elevation="3dp"
                 android:fontFamily="@font/sf_pro_display_regular"
-                android:text="Удобства"
+                android:text="@string/conv"
                 android:textColor="@color/dark_gray"
                 android:textSize="16sp"
                 app:layout_constraintStart_toEndOf="@+id/imageView"
@@ -384,7 +383,7 @@
                 android:layout_marginTop="-5dp"
                 android:elevation="3dp"
                 android:fontFamily="@font/sf_pro_display_regular"
-                android:text="Что включено"
+                android:text="@string/included"
                 android:textColor="@color/dark_gray"
                 android:textSize="16sp"
                 app:layout_constraintStart_toEndOf="@+id/imageView"
@@ -398,7 +397,7 @@
                 android:layout_marginTop="-5dp"
                 android:elevation="3dp"
                 android:fontFamily="@font/sf_pro_display_regular"
-                android:text="Что включено"
+                android:text="@string/included"
                 android:textColor="@color/dark_gray"
                 android:textSize="16sp"
                 app:layout_constraintStart_toEndOf="@+id/imageView"
@@ -412,7 +411,7 @@
                 android:layout_marginBottom="-5dp"
                 android:elevation="3dp"
                 android:fontFamily="@font/sf_pro_display_regular"
-                android:text="Самое необходимое"
+                android:text="@string/necessary"
                 app:layout_constraintBottom_toBottomOf="@+id/imageView"
                 app:layout_constraintStart_toEndOf="@+id/imageView" />
 
@@ -424,7 +423,7 @@
                 android:layout_marginBottom="-5dp"
                 android:elevation="3dp"
                 android:fontFamily="@font/sf_pro_display_regular"
-                android:text="Самое необходимое"
+                android:text="@string/necessary"
                 app:layout_constraintBottom_toBottomOf="@+id/imageView3"
                 app:layout_constraintStart_toEndOf="@+id/imageView" />
 
@@ -436,7 +435,7 @@
                 android:layout_marginBottom="-5dp"
                 android:elevation="3dp"
                 android:fontFamily="@font/sf_pro_display_regular"
-                android:text="Самое необходимое"
+                android:text="@string/necessary"
                 app:layout_constraintBottom_toBottomOf="@+id/imageView6"
                 app:layout_constraintStart_toEndOf="@+id/imageView" />
 
@@ -515,7 +514,7 @@
                 android:layout_marginBottom="10dp"
                 android:backgroundTint="@color/light_blue"
                 android:fontFamily="@font/sf_pro_display_regular"
-                android:text="К выбору номера"
+                android:text="@string/choose_room"
                 android:textColor="#FFFFFF"
                 android:textSize="16sp"
                 app:cornerRadius="40dp"
@@ -547,6 +546,7 @@
                         android:layout_marginTop="200dp"
                         android:paddingTop="30dp"
                         android:secondaryProgressTintMode="src_atop"
+                        android:visibility="visible"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />

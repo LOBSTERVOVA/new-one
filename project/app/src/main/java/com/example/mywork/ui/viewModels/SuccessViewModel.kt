@@ -1,4 +1,4 @@
-package com.example.mywork.ui
+package com.example.mywork.ui.viewModels
 
 import androidx.lifecycle.ViewModel
 import kotlin.random.Random
